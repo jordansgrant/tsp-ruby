@@ -8,8 +8,9 @@ options = TSP::TspParser.parse(ARGV)
 
 locations = TSP::read_input options[:infile]
 
-best_tour = TSP.send(options[:algo], locations, options).get_fittest
+best_tour = TSP.send(options[:algo], locations, options)
 
 puts "\nFinal Distance: #{best_tour.get_total_distance}"
+
 puts "Best Route:"
 best_tour.route.each { |location| puts location.name }

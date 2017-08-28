@@ -4,6 +4,8 @@ require_relative "./location.rb"
 
 module TSP
 
+  # Performs genetic algorithm on the population of Tours
+  # Returns the fittest Tour after n generations
   def self.genetic(locations, opts)
     population = Population.new(opts[:pop_size], locations, opts[:seed_algo]) 
     puts "\nInitial Tour Size: #{population.get_fittest.get_total_distance}\n"
@@ -12,11 +14,29 @@ module TSP
       population = population.evolve(opts[:crossover], opts[:rate])
       print "\rCompleted Generation #{i} of #{opts[:generations]}"
     end   
-    population
+    population.get_fittest
   end
 
+  # Performs a Two Opt algorithm on the best of the seeded population
+  # Returns the tour after "generations" rounds of Two Opt
   def self.two_opt(locations, opts)
-    raise NotImplementedError
+    population = Population.new(opts[:pop_size], locations, opts[:seed_algo]) 
+    puts "\nInitial Tour Size: #{population.get_fittest.get_total_distance}\n"
+
+    best = population.get_fittest
+
+    (1..opts[:generations]).each do |i|
+      best_distance = best.get_total_distance
+      (0..best.length-1).to_a.combination(2) do |i1, i2|
+        new = best.two_opt_transform(i1, i2)
+        if new.get_total_distance < best_distance
+          best = new
+          break
+        end
+        print("\rCompleted Two-Opt Rount #{i} of #{opts[:generations]}")
+      end
+    end
+    best
   end
 
   def self.nearest_neighbor(locations)
