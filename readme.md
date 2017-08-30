@@ -1,24 +1,15 @@
-### Traveling Salesman Implementation in Ruby
+# Traveling Salesman Implementation in Ruby
 
-## Description
+### Description
 
 Implementation of the Traveling Salesmen Problem in ruby.
 
-# File Input
+The Traveling Salesman Problem attempts to create an optimal tour from
+a starting Location through all other Locations in the graph and back
+to the start. The problem is NP-Complete so hueristics will be used to
+attempt to optimize an initial Tour.
 
-Locations are passed to the program by file. The format of the file should be
-as follows:
-
-```
-0 x y
-1 x y
-3 x y
-...
-n-1 x y
-n x y
-```
-
-# Heuristics Used
+### Heuristics Used
 
 Allows the use of two heuristics for optimizing Tours: 
 1) Genetic Algorithm
@@ -32,9 +23,13 @@ locations in a tour at a specified rate (default 1.5%)
 
 I wrote the genetic algorithm because I thought it would be fun, but it is not
 very deterministic. I also implemented a Two-Opt approach. Two-Opt seeks to
-untangle places where the tour crosses over itself, as in the following image:
+untangle places where the tour crosses over itself, as in the following diagram:
 
-[2-opt-wiki]: https://en.wikipedia.org/wiki/2-opt#/media/File:2-opt_wiki.svg  "2-Opt image from wikipedia"
+```
+      - A   B -               - A - D -
+          X         ==>       
+      - C   D -               - C - B -
+```
 
 The algorithm works by finding the two indices (i, j) where a crossover exits and:
 1) Copying the indices from 0 to i - 1 forwards into another Tour
@@ -48,7 +43,7 @@ Two-Opt Search is basically a trial and error approach where you test every
 combination of i and j and keep the resultant Tour if it is better than the
 previous.
 
-# Seed Algorithms
+### Seed Algorithms
 
 Two seed algorithms have been included for testing the capabilities of the two
 algorithms. 
@@ -61,7 +56,20 @@ until the Tour is complete
 
 The Random Tour algorithm just creats a random ordering of locations.
 
-## Usage
+### File Input
+
+Locations are passed to the program by file. The format of the file should be
+as follows:
+
+```
+0 x y
+1 x y
+3 x y
+...
+n-1 x y
+n x y
+```
+### Usage
 
 ``` bash
 Usage: ruby tsp_main.rb [options]
