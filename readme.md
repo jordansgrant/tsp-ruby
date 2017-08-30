@@ -1,24 +1,15 @@
-### Traveling Salesman Implementation in Ruby
+# Traveling Salesman Implementation in Ruby
 
-## Description
+### Description
 
 Implementation of the Traveling Salesmen Problem in ruby.
 
-# File Input
+The Traveling Salesman Problem attempts to create an optimal tour from
+a starting Location through all other Locations in the graph and back
+to the start. The problem is NP-Complete so hueristics will be used to
+attempt to optimize an initial Tour.
 
-Locations are passed to the program by file. The format of the file should be
-as follows:
-
-```
-0 x y
-1 x y
-3 x y
-...
-n-1 x y
-n x y
-```
-
-# Heuristics Used
+### Heuristics Used
 
 Allows the use of two heuristics for optimizing Tours: 
 1) Genetic Algorithm
@@ -48,7 +39,7 @@ Two-Opt Search is basically a trial and error approach where you test every
 combination of i and j and keep the resultant Tour if it is better than the
 previous.
 
-# Seed Algorithms
+### Seed Algorithms
 
 Two seed algorithms have been included for testing the capabilities of the two
 algorithms. 
@@ -61,7 +52,20 @@ until the Tour is complete
 
 The Random Tour algorithm just creats a random ordering of locations.
 
-## Usage
+### File Input
+
+Locations are passed to the program by file. The format of the file should be
+as follows:
+
+```
+0 x y
+1 x y
+3 x y
+...
+n-1 x y
+n x y
+```
+### Usage
 
 ``` bash
 Usage: ruby tsp_main.rb [options]
